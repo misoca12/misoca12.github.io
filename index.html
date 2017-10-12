@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- SDK 読み込み -->
+  <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+</head>
+<body>
+  <!-- 動画表示エレメント -->
+  <video id="vid" />
+  <script type="text/javascript">
+    window.onload = function() {
+
+      // ログレベルを設定
+      cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
+
+      // MediaManager でコントロールしたいvideoエレメントを取得
+      window.mediaElement = document.getElementById('vid');
+      // MediaManager の開始
+      window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
+
+      // CastReceiverManager を取得
+      window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+      // CastReceiverManager の開始
+      castReceiverManager.start();
+
+    };
+  </script>
+</body>
+</html>
