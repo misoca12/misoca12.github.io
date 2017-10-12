@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style type="text/css">
+    @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700);
+    body {
+      font-family: "Droid Serif", serif;
+      color: #444;
+      line-height: 150%;
+      border: 0px;
+      margin: 0px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden !important;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      margin: auto auto;
+      overflow: hidden !important;
+    }
+  </style>
   <!-- SDK 読み込み -->
   <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
   <title>TestReceiver - Cast Audio Receiver</title>
 </head>
 <body>
   <!-- 動画表示エレメント -->
-  <audio id="audio" />
+  <audio id="video" />
   <script type="text/javascript">
     window.onload = function() {
 
       // ログレベルを設定
       cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
 
+      console.log('Starting receiver application');
       // MediaManager でコントロールしたいvideoエレメントを取得
-      window.mediaElement = document.getElementById('audio');
+      window.mediaElement = document.getElementById('video');
       // MediaManager の開始
       window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
 
       // CastReceiverManager を取得
+      console.log('Starting receiver manager');
       window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+      castReceiverManager.onSenderDisconnected = function (event) {
+        console.log("Sender disconnected");
+        if (window.castReceiverManager.getSenders().length == 0 &&
+            event.reason == cast.receiver.system.DisconnectReason.REQUESTED_BY_SENDER) {
+          window.close();
+        }
+      };
+      
       // CastReceiverManager の開始
-      castReceiverManager.start();
+      castReceiverManager.start({maxInactivity: 600});
 
     };
   </script>
