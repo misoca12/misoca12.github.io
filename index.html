@@ -1,30 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- SDK 読み込み -->
-  <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
-  <title>TestReceiver - Cast Audio Receiver</title>
+  <script type="text/javascript"
+      src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js">
+  </script>
 </head>
 <body>
-  <!-- 動画表示エレメント -->
-  <audio id="audio" />
-  <script type="text/javascript">
-    window.onload = function() {
+  <cast-media-player id="player"></cast-media-player>
+  <style>
+    #player {
+        --theme-hue: 210;
+        --splash-image: url("my.png");
+    }
+  </style>
+  <script>
+    const context = cast.framework.CastReceiverContext.getInstance();
+    const playerManager = context.getPlayerManager();
 
-      // ログレベルを設定
-      cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
+    // intercept the LOAD request to be able to read in a contentId and get data
+    playerManager.setMessageInterceptor(
+        cast.framework.messages.MessageType.LOAD, loadRequestData => {
+            if (loadRequestData.media && loadRequestData.media.contentId) {
+                return thirdparty.getMediaById(loadRequestData.media.contentId)
+                .then(media => {
+                  if (media) {
+                    loadRequestData.media.contentUrl = media.url;
+                    loadRequestData.media.contentType = media.contentType;
+                    loadRequestData.media.metadata = media.metadata;
+                  }
+                  return loadRequestData;
+                });
+            }
+            return loadRequestData;
+        });
 
-      // MediaManager でコントロールしたいvideoエレメントを取得
-      window.mediaElement = document.getElementById('audio');
-      // MediaManager の開始
-      window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
+    // listen to all Core Events
+    playerManager.addEventListener(cast.framework.events.category.CORE,
+        event => {
+            console.log(event);
+        });
 
-      // CastReceiverManager を取得
-      window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-      // CastReceiverManager の開始
-      castReceiverManager.start();
+    const MyCastQueue = class extends cast.framework.QueueBase {
+        initialize(loadRequestData) {
+            const media = loadRequestData.media;
+            const items = [];
+            items.push(myCreateItem(media)); // your custom function logic
 
+            const queueData = new cast.framework.messages.QueueData();
+            queueData.items = items;
+
+            return queueData;
+        }
+
+        nextItems(itemId) {
+           return [myCreateNextItem()]; // your custom function logic
+        }
     };
+
+    const playbackConfig = new cast.framework.PlaybackConfig();
+
+    // Sets the player to start playback as soon as there are five seconds of
+    // media contents buffered. Default is 10.
+    playbackConfig.autoResumeDuration = 5;
+
+    const myCastQueue = new MyCastQueue(); // create instance of queue Object
+
+    context.start({queue: myCastQueue, playbackConfig: playbackConfig});
   </script>
 </body>
 </html>
