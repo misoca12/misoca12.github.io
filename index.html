@@ -3,10 +3,11 @@
 <head>
   <!-- SDK 読み込み -->
   <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+  <title>TestReceiver - Cast Audio Receiver</title>
 </head>
 <body>
   <!-- 動画表示エレメント -->
-  <video id="vid" />
+  <audio id="audio" />
   <script type="text/javascript">
     window.onload = function() {
 
@@ -14,7 +15,7 @@
       cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
 
       // MediaManager でコントロールしたいvideoエレメントを取得
-      window.mediaElement = document.getElementById('vid');
+      window.mediaElement = document.getElementById('audio');
       // MediaManager の開始
       window.mediaManager = new cast.receiver.MediaManager(window.mediaElement);
 
