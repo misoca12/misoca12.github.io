@@ -1562,6 +1562,9 @@ sampleplayer.CastPlayer.prototype.onCancelPreload_ = function(event) {
 sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   this.log_('onLoad_');
   this.cancelDeferredPlay_('new media is loaded');
+  this.log_('***************');
+  this.log_(event.data.contentId +'URLを書き換えたい');
+  this.log_('***************');
   this.load(new cast.receiver.MediaManager.LoadInfo(
       /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
       event.senderId));
