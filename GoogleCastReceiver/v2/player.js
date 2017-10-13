@@ -1578,17 +1578,17 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
       'User-Agent': userAgent
     },
   }).done(function (response, textStatus, jqXHR) {
-    this.log_('*** done');
-    this.log_("Redirect to "+jqXHR.responseURL)
+    console.log('*** done');
+    console.log("Redirect to "+jqXHR.responseURL)
     var resourceUrl = jqXHR.responseURL;
-    this.log_("Redirect to "+resourceUrl)
+    console.log("Redirect to "+resourceUrl)
     event.data.media.contentId = resourceUrl;
     this.load(new cast.receiver.MediaManager.LoadInfo(
     /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
     event.senderId));
   }).fail(function (jqXHR, textStatus, errorThrown) {
-    this.log_('*** fail');
-    this.log_("Redirect to "+jqXHR.responseURL)
+    console.log('*** fail');
+    console.log("Redirect to "+jqXHR.responseURL)
   });
   this.log_('***************');
 };
