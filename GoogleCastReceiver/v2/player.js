@@ -1567,8 +1567,8 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   var cookie = event.data.media.metadata.cookie;
   var userAgent = event.data.media.metadata.userAgent;
   this.log_('onetimeUrl:'+onetimeUrl);
-//   this.log_('cookie:'+cookie);
-//   this.log_('userAgent:'+userAgent);
+  this.log_('cookie:'+cookie);
+  this.log_('userAgent:'+userAgent);
   $.ajax({
     url: onetimeUrl,
     xhrFields: {
