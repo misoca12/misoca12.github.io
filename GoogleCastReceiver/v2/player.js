@@ -1580,6 +1580,14 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
       'Cookie': cookie,
       'User-Agent': userAgent
     },
+    statusCode: {
+        404: function(response) {
+          console.log("404 response:"+JSON.stringify(response))
+        },
+        302: function(response) {
+          console.log("302 response:"+JSON.stringify(response))
+        }
+    }
   }).done(function (response, textStatus, jqXHR) {
     console.log('*** done');
     console.log("Redirect to "+JSON.stringify(jqXHR))
