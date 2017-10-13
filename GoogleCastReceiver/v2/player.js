@@ -1563,23 +1563,33 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   this.log_('onLoad_');
   this.cancelDeferredPlay_('new media is loaded');
   this.log_('***************');
-  this.log_(event.data.media.contentId+'のURLを書き換えたい');
-  this.log_('cookie:'+event.data.media.metadata.cookie);
-  this.log_('userAgent:'+event.data.media.metadata.userAgent);
-  this.log_('***************');
-  this.load(new cast.receiver.MediaManager.LoadInfo(
+  var onetimeUrl = event.data.media.contentId;
+  var cookie = event.data.media.metadata.cookie;
+  var userAgent = event.data.media.metadata.userAgent;
+  this.log_('onetimeUrl:'+onetimeUrl);
+  this.log_('cookie:'+cookie);
+  this.log_('userAgent:'+userAgent);
+  $.ajax(
+    url: onetimeUrl,
+    type: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': cookie,
+      'User-Agent': userAgent
+    },
+    complete:function(){
+      var resourceUrl = xhr.responseURL;
+      this.log_("Redirect to "+resourceUrl)
+      event.data.media.contentId = resourceUrl;
+      this.load(new cast.receiver.MediaManager.LoadInfo(
       /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
       event.senderId));
-  /**
-  $.ajax(event.data.media.contentId,{
-    complete:function(){
-      console.log("Redirect to "+xhr.responseURL)
     },
     xhr:function(){
       return xhr = new window.XMLHttpRequest();
     }
   });
-  */
+  this.log_('***************');
 };
 
 
