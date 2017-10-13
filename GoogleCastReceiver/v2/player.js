@@ -1591,7 +1591,9 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
     event.senderId));
   }).fail(function (jqXHR, textStatus, errorThrown) {
     console.log('*** fail');
-    console.log("Redirect to "+JSON.stringify(jqXHR))
+    console.log("jqXHR:"+JSON.stringify(jqXHR))
+    console.log("textStatus:"+JSON.stringify(textStatus))
+    console.log("errorThrown:"+JSON.stringify(errorThrown))
   });
   this.log_('***************');
 };
