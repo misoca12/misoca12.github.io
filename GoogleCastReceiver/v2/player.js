@@ -1563,7 +1563,7 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   this.log_('onLoad_');
   this.cancelDeferredPlay_('new media is loaded');
   this.log_('***************');
-  this.log_(event.data +'URLを書き換えたい');
+  this.log_(JSON.stringify(event.data)+'のURLを書き換えたい');
   this.log_('***************');
   this.load(new cast.receiver.MediaManager.LoadInfo(
       /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
