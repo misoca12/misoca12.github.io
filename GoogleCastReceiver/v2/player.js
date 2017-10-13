@@ -1575,11 +1575,10 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
       withCredentials: true
     },
     type: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Cookie': cookie,
-      'User-Agent': userAgent
-    },
+//     headers: {
+//       'Cookie': cookie,
+//       'User-Agent': userAgent
+//     },
   }).done(function (response, textStatus, jqXHR) {
     console.log('*** done');
     console.log("Redirect to "+JSON.stringify(jqXHR))
