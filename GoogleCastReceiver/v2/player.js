@@ -1571,14 +1571,15 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   this.log_('userAgent:'+userAgent);
   $.ajax({
     url: onetimeUrl,
+    dataType: "jsonp",
     xhrFields: {
       withCredentials: true
     },
     type: 'POST',
-//     headers: {
-//       'Cookie': cookie,
-//       'User-Agent': userAgent
-//     },
+    headers: {
+      'Cookie': cookie,
+      'User-Agent': userAgent
+    },
   }).done(function (response, textStatus, jqXHR) {
     console.log('*** done');
     console.log("Redirect to "+JSON.stringify(jqXHR))
