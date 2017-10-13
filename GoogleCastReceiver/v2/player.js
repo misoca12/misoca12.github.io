@@ -1571,6 +1571,9 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
 //   this.log_('userAgent:'+userAgent);
   $.ajax({
     url: onetimeUrl,
+    xhrFields: {
+      withCredentials: true
+    },
     type: 'POST',
     headers: {
       'Content-Type': 'application/json',
