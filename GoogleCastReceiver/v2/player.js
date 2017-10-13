@@ -1569,7 +1569,7 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   this.log_('onetimeUrl:'+onetimeUrl);
   this.log_('cookie:'+cookie);
   this.log_('userAgent:'+userAgent);
-  $.ajax(
+  $.ajax({
     url: onetimeUrl,
     type: 'POST',
     headers: {
@@ -1577,17 +1577,18 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
       'Cookie': cookie,
       'User-Agent': userAgent
     },
-    complete:function(){
-      var resourceUrl = xhr.responseURL;
-      this.log_("Redirect to "+resourceUrl)
-      event.data.media.contentId = resourceUrl;
-      this.load(new cast.receiver.MediaManager.LoadInfo(
-      /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
-      event.senderId));
-    },
-    xhr:function(){
-      return xhr = new window.XMLHttpRequest();
-    }
+  }).done(function (response, textStatus, jqXHR) {
+    this.log_('*** done');
+    this.log_("Redirect to "+jqXHR.responseURL)
+    var resourceUrl = jqXHR.responseURL;
+    this.log_("Redirect to "+resourceUrl)
+    event.data.media.contentId = resourceUrl;
+    this.load(new cast.receiver.MediaManager.LoadInfo(
+    /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
+    event.senderId));
+  }).fail(function (jqXHR, textStatus, errorThrown) {
+    this.log_('*** fail');
+    this.log_("Redirect to "+jqXHR.responseURL)
   });
   this.log_('***************');
 };
