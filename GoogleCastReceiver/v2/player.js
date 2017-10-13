@@ -1567,8 +1567,8 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   var cookie = event.data.media.metadata.cookie;
   var userAgent = event.data.media.metadata.userAgent;
   this.log_('onetimeUrl:'+onetimeUrl);
-  this.log_('cookie:'+cookie);
-  this.log_('userAgent:'+userAgent);
+//   this.log_('cookie:'+cookie);
+//   this.log_('userAgent:'+userAgent);
   $.ajax({
     url: onetimeUrl,
     type: 'POST',
@@ -1579,7 +1579,7 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
     },
   }).done(function (response, textStatus, jqXHR) {
     console.log('*** done');
-    console.log("Redirect to "+jqXHR.responseURL)
+    console.log("Redirect to "+JSON.stringify(jqXHR))
     var resourceUrl = jqXHR.responseURL;
     console.log("Redirect to "+resourceUrl)
     event.data.media.contentId = resourceUrl;
@@ -1588,7 +1588,7 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
     event.senderId));
   }).fail(function (jqXHR, textStatus, errorThrown) {
     console.log('*** fail');
-    console.log("Redirect to "+jqXHR.responseURL)
+    console.log("Redirect to "+JSON.stringify(jqXHR))
   });
   this.log_('***************');
 };
