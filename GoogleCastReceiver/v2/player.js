@@ -1564,10 +1564,22 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   this.cancelDeferredPlay_('new media is loaded');
   this.log_('***************');
   this.log_(event.data.media.contentId+'のURLを書き換えたい');
+  this.log_('cookie:'+event.data.media.metadata.cookie);
+  this.log_('userAgent:'+event.data.media.metadata.userAgent);
   this.log_('***************');
   this.load(new cast.receiver.MediaManager.LoadInfo(
       /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
       event.senderId));
+  /**
+  $.ajax(event.data.media.contentId,{
+    complete:function(){
+      console.log("Redirect to "+xhr.responseURL)
+    },
+    xhr:function(){
+      return xhr = new window.XMLHttpRequest();
+    }
+  });
+  */
 };
 
 
