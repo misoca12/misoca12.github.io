@@ -1575,7 +1575,7 @@ sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
     xhrFields: {
       withCredentials: true
     },
-    type: 'POST',
+    type: 'GET',
     headers: {
       'Cookie': cookie,
       'User-Agent': userAgent
