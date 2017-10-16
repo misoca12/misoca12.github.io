@@ -1562,48 +1562,51 @@ sampleplayer.CastPlayer.prototype.onCancelPreload_ = function(event) {
 sampleplayer.CastPlayer.prototype.onLoad_ = function(event) {
   this.log_('onLoad_');
   this.cancelDeferredPlay_('new media is loaded');
-  this.log_('***************');
-  var onetimeUrl = event.data.media.contentId;
-  var cookie = event.data.media.metadata.cookie;
-  var userAgent = event.data.media.metadata.userAgent;
-  this.log_('onetimeUrl:'+onetimeUrl);
-  this.log_('cookie:'+cookie);
-  this.log_('userAgent:'+userAgent);
-  $.ajax({
-    url: onetimeUrl,
-    dataType: "jsonp",
-    xhrFields: {
-      withCredentials: true
-    },
-    type: 'GET',
-    headers: {
-      'Cookie': cookie,
-      'User-Agent': userAgent
-    },
-    statusCode: {
-        404: function(response) {
-          console.log("404 response:"+JSON.stringify(response))
-        },
-        302: function(response) {
-          console.log("302 response:"+JSON.stringify(response))
-        }
-    }
-  }).done(function (response, textStatus, jqXHR) {
-    console.log('*** done');
-    console.log("Redirect to "+JSON.stringify(jqXHR))
-    var resourceUrl = jqXHR.responseURL;
-    console.log("Redirect to "+resourceUrl)
-    event.data.media.contentId = resourceUrl;
-    this.load(new cast.receiver.MediaManager.LoadInfo(
-    /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
-    event.senderId));
-  }).fail(function (jqXHR, textStatus, errorThrown) {
-    console.log('*** fail');
-    console.log("jqXHR:"+JSON.stringify(jqXHR))
-    console.log("textStatus:"+JSON.stringify(textStatus))
-    console.log("errorThrown:"+JSON.stringify(errorThrown))
-  });
-  this.log_('***************');
+  this.load(new cast.receiver.MediaManager.LoadInfo(
+  /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
+  event.senderId));
+//   this.log_('***************');
+//   var onetimeUrl = event.data.media.contentId;
+//   var cookie = event.data.media.metadata.cookie;
+//   var userAgent = event.data.media.metadata.userAgent;
+//   this.log_('onetimeUrl:'+onetimeUrl);
+//   this.log_('cookie:'+cookie);
+//   this.log_('userAgent:'+userAgent);
+//   $.ajax({
+//     url: onetimeUrl,
+//     dataType: "jsonp",
+//     xhrFields: {
+//       withCredentials: true
+//     },
+//     type: 'GET',
+//     headers: {
+//       'Cookie': cookie,
+//       'User-Agent': userAgent
+//     },
+//     statusCode: {
+//         404: function(response) {
+//           console.log("404 response:"+JSON.stringify(response))
+//         },
+//         302: function(response) {
+//           console.log("302 response:"+JSON.stringify(response))
+//         }
+//     }
+//   }).done(function (response, textStatus, jqXHR) {
+//     console.log('*** done');
+//     console.log("Redirect to "+JSON.stringify(jqXHR))
+//     var resourceUrl = jqXHR.responseURL;
+//     console.log("Redirect to "+resourceUrl)
+//     event.data.media.contentId = resourceUrl;
+//     this.load(new cast.receiver.MediaManager.LoadInfo(
+//     /** @type {!cast.receiver.MediaManager.LoadRequestData} */ (event.data),
+//     event.senderId));
+//   }).fail(function (jqXHR, textStatus, errorThrown) {
+//     console.log('*** fail');
+//     console.log("jqXHR:"+JSON.stringify(jqXHR))
+//     console.log("textStatus:"+JSON.stringify(textStatus))
+//     console.log("errorThrown:"+JSON.stringify(errorThrown))
+//   });
+//   this.log_('***************');
 };
 
 
