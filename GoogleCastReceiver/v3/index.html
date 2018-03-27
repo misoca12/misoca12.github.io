@@ -13,13 +13,14 @@
   <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js">
   </script>
   <script>
-//     const context = cast.framework.CastReceiverContext.getInstance();
-//     const playerManager = context.getPlayerManager();
+    const context = cast.framework.CastReceiverContext.getInstance();
+    const playerManager = context.getPlayerManager();
 
-//     // intercept the LOAD request to be able to read in a contentId and get data
-//     playerManager.setMessageInterceptor(
-//         cast.framework.messages.MessageType.LOAD, loadRequestData => {
-//             if (loadRequestData.media && loadRequestData.media.contentId) {
+    // intercept the LOAD request to be able to read in a contentId and get data
+    playerManager.setMessageInterceptor(
+        cast.framework.messages.MessageType.LOAD, loadRequestData => {
+            if (loadRequestData.media && loadRequestData.media.contentId) {
+                console.log("contentId -> " + loadRequestData.media.contentId);
 //                 return thirdparty.getMediaById(loadRequestData.media.contentId)
 //                 .then(media => {
 //                   if (media) {
@@ -29,9 +30,9 @@
 //                   }
 //                   return loadRequestData;
 //                 });
-//             }
-//             return loadRequestData;
-//         });
+            }
+            return loadRequestData;
+        });
 
 //     // listen to all Core Events
 //     playerManager.addEventListener(cast.framework.events.category.CORE,
