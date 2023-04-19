@@ -4,6 +4,9 @@
       "namespace": "android_app",
       "package_name": "com.misoca12.instantse",
       "sha256_cert_fingerprints":
-      ["94:BA:17:DA:61:4B:96:BB:9E:ED:E4:ED:CD:DE:98:DC:D5:71:AE:BB:F6:34:56:58:25:A6:C4:51:4D:52:21:65"]
+      [
+        "94:BA:17:DA:61:4B:96:BB:9E:ED:E4:ED:CD:DE:98:DC:D5:71:AE:BB:F6:34:56:58:25:A6:C4:51:4D:52:21:65",
+        "51:BF:38:7C:67:E8:8E:33:EF:05:AF:5C:AD:5D:74:6F:F2:DD:9B:1C:EA:5E:0B:3B:B7:22:00:33:1C:B8:93:C3"
+      ]
     }
   }]
