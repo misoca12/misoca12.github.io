@@ -1,0 +1,9 @@
+  [{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.misoca12.instantse",
+      "sha256_cert_fingerprints":
+      ["94:BA:17:DA:61:4B:96:BB:9E:ED:E4:ED:CD:DE:98:DC:D5:71:AE:BB:F6:34:56:58:25:A6:C4:51:4D:52:21:65"]
+    }
+  }]
