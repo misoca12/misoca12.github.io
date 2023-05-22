@@ -1,9 +1,23 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.misoca12.instantse",
-    "sha256_cert_fingerprints":
-    ["51:BF:38:7C:67:E8:8E:33:EF:05:AF:5C:AD:5D:74:6F:F2:DD:9B:1C:EA:5E:0B:3B:B7:22:00:33:1C:B8:93:C3"]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.misoca12.instantse",
+      "sha256_cert_fingerprints":
+      ["51:BF:38:7C:67:E8:8E:33:EF:05:AF:5C:AD:5D:74:6F:F2:DD:9B:1C:EA:5E:0B:3B:B7:22:00:33:1C:B8:93:C3"]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.misoca12.instantse",
+      "sha256_cert_fingerprints": [
+        "D5:20:11:E6:56:66:E8:62:0B:18:9F:8E:B9:67:D5:68:A5:54:C0:F5:FF:6E:36:E4:CA:AD:CF:1F:13:28:73:B1"
+      ]
+    }
   }
-}]
+]
